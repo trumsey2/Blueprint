@@ -1,4 +1,3 @@
-
 /* CSS Reset */
 * {
     margin: 0;
@@ -373,9 +372,6 @@ h2 {
     background-color: #041c2c;
 }
 
-.service-detail h2 {
-    margin: 2rem;
-}
 
 .service-detail h3 {
     font-size: 1.6rem;
@@ -408,7 +404,7 @@ h2 {
 .service-detail ul {
     font-size: 1rem;
     line-height: 1.6;
-    margin-left: 4rem;
+
 }
 
 .service-detail li {
@@ -752,16 +748,33 @@ FOOTER
 
 @media (max-width: 768px) {
     nav ul {
-        display: none; /* Hide nav links on mobile */
+        display: none !important; /* Hide nav links on mobile */
     }
 
     .hero-content h1 {
         font-size: 3rem;
     }
 
+    .service-detail ul {
+        margin-left: 0;
+    }
+
+    .service-detail h2 {
+    margin-bottom: 0;
+    padding: 2rem 0rem 0.5rem;
+    text-align: left;
+    }
+
     .service-cards, .review-cards {
         flex-direction: column;
         align-items: center;
+    }
+
+    .footer__text--list {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem; /* was 14rem = 224px, meant for a horizontal row */
+        text-align: center;
     }
 }
 
