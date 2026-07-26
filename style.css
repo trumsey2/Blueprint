@@ -1054,7 +1054,8 @@ RESPONSIVENESS: Small Phones
         align-items: flex-start;
     }
 
-    #hero .cta-button {
+    #hero .cta-button,
+    .ppf-hero .cta-button {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
     }
@@ -1100,6 +1101,12 @@ RESPONSIVENESS: Small Phones
     .cta-button {
         padding: 0.8rem 1.5rem;
         margin: 1rem;
+    }
+
+    #hero .cta-button,
+    .ppf-hero .cta-button {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -1162,6 +1169,14 @@ RESPONSIVENESS: Small Phones
 
     .service-detail {
         padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 340px) {
+    #hero .cta-button,
+    .ppf-hero .cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.7rem;
     }
 }
 
