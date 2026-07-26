@@ -70,8 +70,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = e.clientY - rect.top;
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
-        });
     });
+
+    // Contact Form Submission
+    const form = document.querySelector('.contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                formStatus.innerHTML = "<h2>Thank you!</h2><p>Your message has been sent. We'll be in touch soon.</p>";
+                form.style.display = 'none';
+            } else {
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        formStatus.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+                    } else {
+                        formStatus.innerHTML = "Oops! There was a problem submitting your form"
+                    }
+                })
+            }
+        }).catch(error => {
+            formStatus.innerHTML = "Oops! There was a problem submitting your form"
+        });
+    }
+    form.addEventListener("submit", handleSubmit)
+});
 
     // Lightbox functionality for PPF page image
     const ppfImage = document.querySelector('.service-detail-img');
