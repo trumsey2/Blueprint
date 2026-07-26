@@ -595,6 +595,14 @@ h2 .italic {
     }
 }
 
+@media (max-width: 280px) {
+    #hero .cta-button,
+    .ppf-hero .cta-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.6rem;
+    }
+}
+
 .service-detail-img {
     display: block;
     max-width: 100%;
@@ -942,11 +950,21 @@ FOOTER
 
 /* 
 
-RESPONSIVENESS: Small Phones 
+RESPONSIVENESS: Tablets and below 
 
 */
-
 @media (max-width: 990px) {
+    /* Show hamburger menu and hide main nav */
+    .btn__menu {
+        display: block;
+    }
+    .nav__container:not(.is-open) {
+        display: none !important;
+    }
+    .right-list {
+        display: none;
+    }
+
     .card {
         width: 100%;
         max-width: 400px;
@@ -963,10 +981,6 @@ RESPONSIVENESS: Small Phones
     .card__back ul {
         font-size: 0.8rem;
         padding: 0 1rem;
-    }
-
-    nav ul {
-        display: none !important; /* Hide nav links on mobile */
     }
 
     .hero-content h1 {
@@ -993,18 +1007,6 @@ RESPONSIVENESS: Small Phones
         align-items: center;
     }
 
-    .btn__menu {
-        display: block; /* Show hamburger menu */
-    }
-
-    .nav__container:not(.is-open) {
-        display: none !important; /* Hide nav links if menu is not open */
-    }
-
-    .right-list {
-        display: none; /* Hide booking button and social icons */
-    }
-
     .feature-grid {
         grid-template-columns: 1fr;
     }
@@ -1012,7 +1014,7 @@ RESPONSIVENESS: Small Phones
     .footer__text--list {
         flex-direction: column;
         align-items: center;
-        gap: 2rem; /* was 14rem = 224px, meant for a horizontal row */
+        gap: 2rem;
         text-align: center;
     }
 
@@ -1025,18 +1027,13 @@ RESPONSIVENESS: Small Phones
 
     .certification-logos {
         max-width: 80%; /* Allow logos to shrink */
-    }
-
-    .certification-logos {
         gap: 2rem;
     }
 
     .bolt {
         width: 60px;
     }
-}
 
-@media (max-width: 990px) {
     .feature-cards .card__front p {
         display: block;
         font-size: 0.7rem;
@@ -1111,6 +1108,10 @@ RESPONSIVENESS: Small Phones
 }
 
 @media (max-width: 480px) {
+    .nav__container.is-open ul {
+        display: flex !important;
+        align-items: center;
+    }
     nav ul {
         display: none !important; /* Hide nav links on mobile */
     }
