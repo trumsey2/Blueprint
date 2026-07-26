@@ -1014,9 +1014,8 @@ RESPONSIVENESS: Tablets and below
 
     .footer__text--list {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Was align-items: center */
         gap: 2rem;
-        text-align: center;
     }
 
     .certification-cards {
