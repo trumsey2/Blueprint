@@ -1052,6 +1052,12 @@ RESPONSIVENESS: Small Phones
     .footer__text-R {
         text-align: left;
         align-items: flex-start;
+    }
+
+    #hero .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
 }
 
 /* Lightbox styles */
