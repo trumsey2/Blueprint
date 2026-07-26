@@ -28,6 +28,7 @@ header {
 
 nav {
     display: flex;
+    justify-content: space-between;
     align-items: stretch;
     max-width: 1200px;
     margin: 0 auto;
@@ -316,6 +317,29 @@ h2 .italic {
     max-width: 350px;
     min-height: 400px;
     cursor: pointer;
+
+    /* Add a pseudo-element for the shine effect */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        background: radial-gradient(
+            600px circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.4),
+            transparent 30%
+        );
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+
 }
 
 .card__inner {
@@ -338,6 +362,12 @@ h2 .italic {
     border-radius: 16px;
 }
 
+.card__front .btn {
+    margin-bottom: .5rem;
+    padding: 0.64rem 1.2rem;
+    font-size: 0.8rem;
+}
+
 .card__front, .card__back {
     position: absolute;
     width: 100%;
@@ -357,7 +387,7 @@ h2 .italic {
 
 .card:hover .card__front,
 .card:hover .card__back {
-    box-shadow: 0 0 15px 5px #0151fd76;
+    box-shadow: 0 0 25px 8px #0151fdc5; /* Increased glow effect */
 }
 
 .card__back {
@@ -435,7 +465,7 @@ h2 .italic {
 
 
 .service-detail {
-    padding: 3rem 6rem;
+    padding: 3rem 3rem;
     max-width: 1200px;
     margin: 0 auto;
     background-color: #041c2c;
@@ -446,18 +476,22 @@ h2 .italic {
 .section.edge h3 {
     font-size: 1.6rem;
     margin-bottom: 0;
-    margin-top: 2rem;
-    padding: 2rem 0rem 0.5rem;
+    margin-top: 0;
+    padding: 1rem 0rem 0.5rem;
 }
 
 .service-detail p {
     font-size: 1rem;
     font-weight: 200;
     line-height: 1.6;
-    margin-top: 8px;
-    margin-bottom: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
     color: #ffffff;
     text-wrap: pretty;
+}
+
+.ppf-hero .hero-content p {
+    padding-bottom: 0;
 }
 
 .service-detail--2 p {
@@ -466,7 +500,7 @@ h2 .italic {
     font-weight: 200;
     line-height: 1.6;
     margin-top: 8px;
-    margin-bottom: 8rem;
+    margin-bottom: 2rem;
     color: #ffffff;
     text-wrap: pretty;
 }
@@ -878,6 +912,27 @@ FOOTER
     box-shadow: 0 0 24px 12px #0151fd76;
 }
 
+/* Mobile Menu Styles */
+.btn__menu {
+    display: none; /* Hidden by default */
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.nav__container.is-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #041c2c;
+    padding: 1rem 0;
+}
+
 .footer__social--link {
     width: 50px;
     height: 50px;
@@ -891,7 +946,7 @@ RESPONSIVENESS: Small Phones
 
 */
 
-@media (max-width: 770px) {
+@media (max-width: 990px) {
     .card {
         width: 100%;
         max-width: 400px;
@@ -917,6 +972,10 @@ RESPONSIVENESS: Small Phones
     .hero-content h1 {
         font-size: 3rem;
     }
+    
+    .hero-text-container {
+        padding: 2rem 1rem;
+    }
 
     .service-detail ul {
         margin-left: 0;
@@ -934,6 +993,18 @@ RESPONSIVENESS: Small Phones
         align-items: center;
     }
 
+    .btn__menu {
+        display: block; /* Show hamburger menu */
+    }
+
+    .nav__container:not(.is-open) {
+        display: none !important; /* Hide nav links if menu is not open */
+    }
+
+    .right-list {
+        display: none; /* Hide booking button and social icons */
+    }
+
     .feature-grid {
         grid-template-columns: 1fr;
     }
@@ -949,7 +1020,11 @@ RESPONSIVENESS: Small Phones
         flex-direction: column;
         align-items: center;
         gap: 2rem;
-        height: auto;
+        height: auto; /* Revert fixed height */
+    }
+
+    .certification-logos {
+        max-width: 80%; /* Allow logos to shrink */
     }
 
     .certification-logos {
@@ -959,6 +1034,49 @@ RESPONSIVENESS: Small Phones
     .bolt {
         width: 60px;
     }
+}
+
+@media (max-width: 990px) {
+    .feature-cards .card__front p {
+        display: block;
+        font-size: 0.7rem;
+    }
+
+    .feature-cards .card__front h3 {
+        font-size: 1rem;
+    }
+
+    .footer__text--list,
+    .footer__text-L,
+    .footer__text-C,
+    .footer__text-R {
+        text-align: left;
+        align-items: flex-start;
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.is-open {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+}
+}
 
     .feature-cards .card__inner {
         min-height: 160px !important;
@@ -1008,6 +1126,36 @@ RESPONSIVENESS: Small Phones
         align-items: center;
         gap: 1rem; /* was 14rem = 224px, meant for a horizontal row */
         text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .cta-button {
+        padding: 0.6rem 1rem;
+        margin: 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-text-container {
+        padding: 2rem 0.5rem;
+    }
+
+    main > section {
+        padding: 4rem 1rem;
+    }
+
+    .service-detail {
+        padding: 2rem 1rem;
     }
 }
 

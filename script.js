@@ -1,74 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const galleryContainer = document.querySelector('.gallery-container');
-    const galleryGrid = document.querySelector('.gallery-grid');
-    const prevBtn = document.querySelector('.prevBtn');
-    const nextBtn = document.querySelector('.nextBtn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
 
-    if (galleryContainer && galleryGrid && galleryItems.length > 0) {
-        // Clone items for a seamless loop
-        galleryItems.forEach(item => {
-            galleryGrid.appendChild(item.cloneNode(true));
-        });
-
-        let animationFrameId;
-
-        const autoScroll = () => {
-            const scrollLoopPoint = galleryGrid.scrollWidth / 2;
-            galleryGrid.scrollLeft += 1;
-            if (galleryGrid.scrollLeft >= scrollLoopPoint) {
-                galleryGrid.scrollLeft = 0;
+    // Card flip functionality
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // If the button on the back of the PPF card is clicked, allow navigation
+            if (e.target.getAttribute('href') === 'ppf.html' && e.target.textContent === 'More about PPF') {
+                return; // Do nothing, allow the default link behavior
             }
-            animationFrameId = requestAnimationFrame(autoScroll);
-        };
 
-        const startAutoScroll = () => {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(autoScroll);
-        };
-
-        const stopAutoScroll = () => {
-            cancelAnimationFrame(animationFrameId);
-        };
-
-        const itemWidth = galleryItems[0].offsetWidth;
-        const gap = parseFloat(getComputedStyle(galleryGrid).gap) || 0;
-        const scrollAmount = itemWidth + gap;
-
-        let scrollTimeout;
-
-        prevBtn.addEventListener('click', () => {
-            stopAutoScroll();
-            galleryGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(startAutoScroll, 5000);
+            // For all other clicks on a card, prevent default and flip
+            e.preventDefault();
+            card.classList.toggle('is-flipped');
         });
+    });
 
-        nextBtn.addEventListener('click', () => {
-            stopAutoScroll();
-            galleryGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(startAutoScroll, 5000);
-        });
-
-
-
-        startAutoScroll();
-    }
-
-    const copyEmailLink = document.getElementById('copy-email');
-
-    if (copyEmailLink) {
-        copyEmailLink.addEventListener('click', function(event) {
-            event.preventDefault();
+    // Email copy functionality
+    const copyEmail = document.getElementById('copy-email');
+    if (copyEmail) {
+        copyEmail.addEventListener('click', (e) => {
+            e.preventDefault();
             const email = 'info@blueprintautocare.com';
             navigator.clipboard.writeText(email).then(() => {
                 const tooltip = document.createElement('span');
-                tooltip.textContent = 'Copied!';
+                tooltip.textContent = 'Email copied!';
                 tooltip.classList.add('tooltip');
-                copyEmailLink.appendChild(tooltip);
+                copyEmail.appendChild(tooltip);
                 setTimeout(() => {
-                    copyEmailLink.removeChild(tooltip);
+                    tooltip.remove();
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy email: ', err);
@@ -76,13 +35,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const serviceCards = document.querySelectorAll('.card');
+    // Gallery scroll functionality
+    const galleryGrid = document.querySelector('.gallery-grid');
+    const prevBtn = document.querySelector('.prevBtn');
+    const nextBtn = document.querySelector('.nextBtn');
 
-    serviceCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('btn')) {
-                card.classList.toggle('is-flipped');
-            }
+    if (galleryGrid && prevBtn && nextBtn) {
+        const scrollAmount = 320; // Width of a gallery item + gap
+
+        nextBtn.addEventListener('click', () => {
+            galleryGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            galleryGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    }
+
+    // Hamburger menu functionality
+    const menuButton = document.querySelector('.btn__menu');
+    const navContainer = document.querySelector('.nav__container');
+
+    if (menuButton && navContainer) {
+        menuButton.addEventListener('click', () => {
+            navContainer.classList.toggle('is-open');
+        });
+    }
+
+    // Glossy card shine effect
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
         });
     });
+
+    // Lightbox functionality for PPF page image
+    const ppfImage = document.querySelector('.service-detail-img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    if (ppfImage && lightbox && lightboxImg) {
+        ppfImage.style.cursor = 'pointer';
+        ppfImage.addEventListener('click', () => {
+            lightbox.classList.add('is-open');
+            lightboxImg.src = ppfImage.src;
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('is-open');
+        });
+    }
 });
