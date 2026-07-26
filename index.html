@@ -130,12 +130,22 @@
 				</div>
 			</div>
 		</section>
-		<section class="section-background" id="contact">
-			<h2>Book With Us</h2>
-			<div class="acuity-container">
-				<iframe allowfullscreen class="button" frameborder="0" src="https://app.acuityscheduling.com/schedule.php?owner=36127642&ref=embedded_csp" title="Book an Appointment"></iframe>
-			</div><!-- <iframe src="https://app.acuityscheduling.com/schedule.php?owner=36127642&ref=embedded_csp" title="Schedule Appointment" width="100%" height="800" frameBorder="0" allow="payment"></if[...]
-
+        <section id="contact" class="section-background">
+            <h2>Contact Us</h2>
+            <h5>Request a quote or schedule a service</h5>
+            <form class="contact-form" action="https://formspree.io/f/info@blueprintautocare.com" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+                <label for="vehicle">Vehicle Make/Model</label>
+                <input type="text" id="vehicle" name="vehicle">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </section>
     </main>
 
