@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }).then(response => {
             if (response.ok) {
-                formStatus.innerHTML = "<h2>Thank you!</h2><p>Your message has been sent. We'll be in touch soon.</p>";
+                formStatus.innerHTML = "<h2>Thank you!</h2><p style='text-align: center;'>Your message has been sent. We'll be in touch soon.</p>";
                 form.style.display = 'none';
             } else {
                 response.json().then(data => {
