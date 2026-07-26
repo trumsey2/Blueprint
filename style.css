@@ -1109,10 +1109,8 @@ RESPONSIVENESS: Tablets and below
 @media (max-width: 480px) {
     .nav__container.is-open ul {
         display: flex !important;
+        flex-direction: column !important;
         align-items: center;
-    }
-    nav ul {
-        display: none !important; /* Hide nav links on mobile */
     }
 
     .hero-content h1 {
