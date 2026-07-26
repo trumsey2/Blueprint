@@ -1080,13 +1080,12 @@ RESPONSIVENESS: Tablets and below
     max-width: 90%;
     max-height: 90%;
 }
-}
 
-    .feature-cards .card__inner {
+.feature-cards .card__inner {
         min-height: 160px !important;
-    }
-}
-    @media (max-width: 588px) {
+ }
+   
+ @media (max-width: 588px) {
     .hero-text-container {
         padding: 2rem 1rem;
     }
