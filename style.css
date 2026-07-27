@@ -1178,3 +1178,9 @@ RESPONSIVENESS: Tablets and below
     }
 }
 
+.image-stack-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Adjust this value for the desired spacing */
+}
+
